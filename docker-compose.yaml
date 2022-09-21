@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  portfolio_front:
+    build:
+      context: ./client
+    ports:
+     - "4200:4200"
+    stdin_open: true
+    tty: true
+  portfolio_backend:
+    build: 
+      context: ./server_new
+    ports:
+      - "8080:8080"
+    stdin_open: true
+    tty: true
+  dummy_trade:
+    image: callalyf/dummy-order-filler:0.0.1
+    environment:
+      - DB_NAME=portfolio_DB
+      - DB_TABLE=order_history
+      - DB_HOST=18.140.153.65
+      - DB_PORT=8380
+      - DB_USER=dummy_trade
+      - DB_PASS=123456
